@@ -1,0 +1,11 @@
+.container-list{
+    background-color: #49114e;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    font-family: sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-inline: 10%; 
+}

@@ -1,0 +1,15 @@
+.container {
+  width: 25rem;
+  height: 30rem;
+  background-color: rgb(85, 59, 83);
+  align-self: center;
+  justify-content: center;
+  border-radius: 15px;
+  text-align: center;
+}
+
+h3{
+  padding: 20px;
+  color: white;
+  font-family: sans-serif;
+}
