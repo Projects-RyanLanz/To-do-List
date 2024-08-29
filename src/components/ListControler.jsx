@@ -1,27 +1,47 @@
-import React from 'react'
+import React , { useState } from 'react'
 import Button from './Button'
 import List from './List'
+import ListElement from './ListElement'
 
-import { useState } from 'react'
-
+ 
 import './ListControler.css'
 
 const ListControler = () => {
 
-    const print = (e) => {
-        e.preventDefault();
-        const value = document.getElementById('content').value
-        console.log(value)
+  const [itens, setItens] = useState([]);
+  const [newItem, setNewItem] = useState('');
+ 
+ 
+  const addItem = (e) => {
+    e.preventDefault();
+ 
+    if(newItem.trim() === '') return;
+    
+    const newItemContent = {
+      id: Date.now(),
+      text: newItem
     }
+
+    setItens([...itens,newItemContent])
+    setNewItem('');
+
+    console.log(itens)
+  }
     
   return (
     <div className="container-list">
-        <form action="">
+        <form action="" onSubmit={addItem}>
             <label htmlFor="content">Conteudo:</label>
-            <input type="text" name='content' id='content'/>
-            <Button text='Oi'content={(e) => {print(e)}} />
+            <input type="text" name='content' id='content' 
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}/>
+            <button type='submit'>Oi</button>
         </form>
-        <List />
+        <ul> 
+          {itens.map(item => (
+            <ListElement key={item.id} id={item.id} text={item.text} />
+          ))}
+        </ul>
     </div>
   )
 
