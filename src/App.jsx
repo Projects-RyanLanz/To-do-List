@@ -6,9 +6,13 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        <h3>Lista de afazeres:</h3>
-        <ListControler />
+      <div className="container container-app">
+        <div className="row">
+          <div className="col">
+            <h3>Lista de afazeres:</h3>
+            <ListControler />
+          </div>
+        </div>
       </div>
     </>
   )

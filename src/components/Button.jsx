@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react' 
 
-const Button = ({ text, content }) => {
+const Button = ({ text, content, clas}) => {
 
     const action = (e) => {
         content(e);
     }
   return (
-    <button onClick={action}>{text}</button>
+    <button onClick={action} className={clas}>{text}</button>
   )
 }
 
