@@ -1,20 +1,33 @@
 import express, { Application } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client"; 
+import router from "./routes/taskRouter" 
+const taskRouter = router
 
 const app: Application = express()
 const prisma = new PrismaClient() 
 const PORT = 3000 
+
 app.use(express.json())
 
-app.get('/users', async (req, res) => {
-    try {
-        const users = await prisma.users.findMany(); // Busca todos os usuários
-        res.json(users); // Retorna os usuários em formato JSON
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao buscar usuários' });
-    }
-});
+app.use('/tasks',taskRouter)
+//GET
+ 
+
+//POST
+app.post('/createTask', async (req, res) => {
+
+    const { description } = req.body;
+    const currentDate = new Date().toISOString()
+
+    const result = await prisma.task.create({
+        data: {
+            description: description,
+            updatedAt: currentDate,
+        }
+    })
+
+    res.json(result)
+})
 
 app.listen(PORT, () => {
     console.log(`Listening to requests hon port ${PORT}`);
