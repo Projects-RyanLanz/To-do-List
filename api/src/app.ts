@@ -9,25 +9,9 @@ const PORT = 3000
 
 app.use(express.json())
 
-app.use('/tasks',taskRouter)
-//GET
  
-
-//POST
-app.post('/createTask', async (req, res) => {
-
-    const { description } = req.body;
-    const currentDate = new Date().toISOString()
-
-    const result = await prisma.task.create({
-        data: {
-            description: description,
-            updatedAt: currentDate,
-        }
-    })
-
-    res.json(result)
-})
+app.use('/task',taskRouter) 
+app.use('/task/{id}',taskRouter) 
 
 app.listen(PORT, () => {
     console.log(`Listening to requests hon port ${PORT}`);
