@@ -14,7 +14,13 @@ const ListElement = ({ id, text, action, itens }) => {
 
   const subItem = (e) => {
     e.preventDefault();
-    action(itens.filter(itens => itens.id !== id));
+ 
+    fetch("http://localhost:3000/task/"+id,{
+      method:'DELETE'
+    })
+    .then((response) => {response.json()
+    action(itens.filter(itens => itens.id !== id))})
+    .catch((error)=> {console.log(error+"aa")}) 
   }
 
   const editItem = (e) => {
@@ -31,7 +37,28 @@ const ListElement = ({ id, text, action, itens }) => {
     }else{
       inputElement.classList.add('hidden')
       spanElement.classList.remove('hidden')
-      action(itens.map(item => item.id  === id ? {...item, text: inputElement.value} : item))
+
+      action(itens.map(item => item.id  === id ? {...item, description: inputElement.value} : item))
+
+      fetch('http://localhost:3000/task/'+id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json', // Define o tipo de conteúdo como JSON
+        },
+        body: JSON.stringify({ description: inputElement.value }), // Converte o objeto para JSON
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro na requisição');
+        }
+        
+        return response.json(); // Retorna a resposta em JSON
+      }) 
+      .catch(error => {
+        console.error('Erro:', error); 
+      });
+
+      
     }
   }
 
