@@ -1,5 +1,5 @@
 import {Router} from "express"
-import {createTask, deleteTask, getAllTask, getTaskByid, updateTask} from "../controller/taskController"
+import {createTask, deleteTask, getAllTask, getTaskByid, updateTask, updateTaskState} from "../controller/taskController"
 
 const router = Router()
 
@@ -12,6 +12,7 @@ router.post('/', createTask)
 
 //UPDATE
 router.put('/:id', updateTask)
+router.put('/:id', updateTaskState)
 
 //UPDATE
 router.delete('/:id', deleteTask)

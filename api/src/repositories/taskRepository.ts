@@ -34,6 +34,15 @@ export class TaskRepository {
         });
     }
 
+    async updateState(id:number,data:{completed?: boolean;}){ 
+        return await prisma.task.update({
+            where:{
+                id:id
+            },
+            data,
+        });
+    }
+
     //DELETE
     async delete(id:number){ 
         return await prisma.task.delete({

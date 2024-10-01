@@ -47,6 +47,18 @@ export const updateTask = async (req:Request,res:Response)=>{
     }
 }
 
+export const updateTaskState = async (req:Request,res:Response)=>{
+    const id = Number(req.params.id)
+    const completed = req.body
+
+    try{
+        const tasks = await taskRepository.update(Number(id),completed)
+        res.json(tasks)
+    } catch(error){
+        res.status(500).json({ error: 'Erro ao obter tarefas' });
+    }
+}
+
 //DELETE
 export const deleteTask = async (req:Request,res:Response)=>{
     const id = Number(req.params.id) 

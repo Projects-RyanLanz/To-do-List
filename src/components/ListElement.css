@@ -1,3 +1,11 @@
 .hidden{
     display: none;
 }
+
+.text-wrap{
+    white-space: normal;
+}
+
+.completed{
+    background-color: green;
+}
